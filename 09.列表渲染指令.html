@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+    <div class="root">
+
+        <ul>
+            <li v-for="k,i in list" :key="id" :title="k.name">索引: {{i}} 姓名:{{k.name}}</li>
+        </ul>
+    </div>
+    <script>
+        //创建vue实例
+        new Vue({
+            el: '.root', //指定当前vue 为哪个容器使用
+            data: {
+                list: [{ id: 1, name: '张三' }, { id: 2, name: '李四' }]
+            }
+        });
+
+    </script>
+
+    <script>
+        //1. v-for="(item,index) in list"
+        //2. item,index除了子元素 自己也可以访问
+        //3. 只要用了v-for指令 就要用 :key 并且以id 为值(在vue文件中不绑定key就报错)
+        //4. key 的值类型必须是字符串或数字(用索引没有意义 索引不具有唯一性)
+    </script>
+</body>
+
+</html>

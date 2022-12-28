@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <div class="root">
+    <p v-for="item in box">
+      <input type="checkbox" :value="item" v-model="flag"><span>{{item}}</span>
+    </p>
+    <ul v-for="k in flag">
+      <li>{{k}}</li>
+    </ul>
+  </div>
+  <script>
+    //创建vue实例
+    new Vue({
+      el: '.root', //指定当前vue 为哪个容器使用
+      data: {
+        box: ['科技', '喜剧', '动漫', '冒险', '科幻', '娱乐'],
+        flag: []
+      },
+      methods: {
+
+      }
+    });
+
+  </script>
+</body>
+
+</html>

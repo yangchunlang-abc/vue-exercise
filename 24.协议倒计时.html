@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <style>
+    .ttss {
+      overflow-y: scroll;
+      resize: none;
+    }
+  </style>
+  <div class="root">
+    <textarea name="" id="" cols="20" rows="10" class="ttss">
+      scrollbar属性、样式详解
+1．overflow内容溢出时的设置（设定被设定对象是否显示滚动条）
+    overflow-x水平方向内容溢出时的设置
+    overflow-y垂直方向内容溢出时的设置
+    以上三个属性设置的值为visible(默认值)、scroll（显示）、hidden（隐藏）、auto（自动）。 
+
+　例如：显示y轴下拉条：  style="overflow-y:scroll" 
+
+2．scrollbar-3d-light-color立体滚动条亮边的颜色（设置滚动条的颜色）
+    scrollbar-arrow-color上下按钮上三角箭头的颜色
+    scrollbar-base-color滚动条的基本颜色
+    scrollbar-dark-shadow-color立体滚动条强阴影的颜色
+    scrollbar-face-color立体滚动条凸出部分的颜色
+    scrollbar-highlight-color滚动条空白部分的颜色
+    scrollbar-shadow-color立体滚动条阴影的颜色
+      在html中，可以通过给input或者button标签设置disabled属性来禁用按钮元素，进而使按钮不可用。 disabled 属性规定禁用按钮。 被禁用的按钮既不可用，也不可点击。
+
+    </textarea>
+    <button :disabled="isShow">我已阅读用户协议({{count}})</button>
+  </div>
+  <script>
+    //创建vue实例
+    new Vue({
+      el: '.root', //指定当前vue 为哪个容器使用
+      data: {
+        isShow: true,
+        count: 10,
+      },
+      mounted() {
+        let timer = setInterval(() => {
+          this.count--
+          if (this.count <= 0) {
+            this.isShow = false
+            this.count = ''
+            clearInterval(timer)
+          }
+        }, 1000)
+
+
+
+      }
+    });
+
+  </script>
+</body>
+
+</html>

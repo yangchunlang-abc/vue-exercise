@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+    <!-- 内容渲染指令 -->
+    <div id="app">
+        <p v-text="username"></p>
+        <p v-text="gender">性别：</p>
+        <hr>
+        <p>姓名: {{username}}</p>
+        <p>性别: {{gender}}</p>
+        <hr>
+        <div v-text="info"></div>
+        <div>{{info}}</div>
+        <div v-html="info"></div>
+        <!-- 插值的内部可以使用简单的javascript运算 -->
+        <div>1+2的结果是:{{1+2}}</div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                username: '张三',
+                gender: '女',
+                info: '<h4 style="color:red">hello world</h4>'
+            }
+        })
+    </script>
+    <script>
+        //1. v-text会覆盖原来的文本 (实际开发用的不多)
+        //2. 插值表达式 {{}} 解决内容覆盖问题 (实际开发用的最多) 只能用在内容上 不能用在属性上
+        //3. v-html 可以渲染带标签的文本内容
+
+    </script>
+</body>
+
+</html>

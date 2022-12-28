@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <div class="root">
+    <span v-for="(k,index) in list" :key="index">
+      <input type="checkbox" :value="k" v-model.number="arr"><span>{{k}}</span>
+    </span>
+    <p>总价：{{add}}</p>
+    <button @click="show">点击使用reduce遍历list</button>
+  </div>
+  <script>
+    //创建vue实例
+    new Vue({
+      el: '.root', //指定当前vue 为哪个容器使用
+
+      data: {
+        list: ['9', '15', '19', '25', '29', '31', '40'],
+        arr: []
+      },
+      computed: {
+        //使用计算属性把arr里的元素全加
+        add() {
+          //reduce的用法真的是骚气 可以设置遍历的初始值
+          // pre 初始元素值 cur
+          return this.arr.reduce((pre, cur) => {
+            return pre + cur
+          }, 0)
+        }
+      },
+      methods: {
+        show() {
+          return this.list.reduce((pre, cur) => {
+            console.log(pre, cur);
+          })
+        }
+      }
+      // 算了反正用的少 拿来求和好使
+    });
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../js相关引用/css/bootstrap.min.css">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+</head>
+
+<body>
+    <div class="root" style="padding:50px;">
+        <form class="form-inline" @submit.prevent="add">
+            <div class="form-group">
+                <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                <div class="input-group">
+                    <div class="input-group-addon">品牌名称</div>
+                    <input type="text" class="form-control" id="exampleInputAmount" placeholder="请输入品牌名称"
+                        v-model.trim="brand">
+
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">添加</button>
+        </form>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>品牌名称</th>
+                    <th>状态</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="k in list" :key="k.id">
+                    <td>{{k.id}}</td>
+                    <td>{{k.name}}</td>
+                    <td>
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" :id="'cb'+k.id" v-model="k.status">
+                            <label class="custom-control-label" :for="'cb'+k.id" v-if="k.status">已启用</label>
+                            <label class="custom-control-label" :for="'cb'+k.id" v-else>已禁用</label>
+                        </div>
+                    </td>
+                    <td>{{k.time | time}}</td>
+                    <td><a href="javascript:;" @click="remove(k.id)">删除</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <script>
+        //创建全局过滤器
+        Vue.filter('time', function (str) {
+            //调用dayjs
+            // dayjs给 Date 对象做了一层封装。
+            // 使用支持的数据格式调用 dayjs() 即可取到这个封装的对象。
+            return dayjs(str).format('YYYY-M-DD')
+        })
+        //创建vue实例
+        new Vue({
+            el: '.root', //指定当前vue 为哪个容器使用
+            data: {
+                brand: '',//用户输入的信息
+                nextId: '5',//下一个可用id
+                list: [{ id: 1, name: '宝马', status: true, time: new Date() },
+                { id: 2, name: '奔驰', status: false, time: new Date() },
+                { id: 3, name: '奥迪', status: true, time: new Date() },
+                { id: 4, name: '大众', status: false, time: new Date() },
+                ]
+            },
+            methods: {
+                //点击删除品牌信息
+                remove(id) {
+                    this.list = this.list.filter(item => item.id !== id)
+                    //过滤id是点击的数组
+                },
+                //阻止表单默认提交行为之后 触发add
+                add() {
+                    if (this.brand === '') {
+                        alert('不能为空！')
+                        return
+                    }
+                    else {
+                        //应该用添加数组的方法push
+                        //1. 添加的品牌对象整理处理 往list数组中push对象
+                        //2. 清空brand 同时让id自增
+                        const obj = {
+                            id: this.nextId,
+                            name: this.brand,
+                            status: true,
+                            time: new Date()
+                        }
+                        this.list.push(obj)
+                        this.brand = '',
+                            this.nextId++;
+                    }
+                }
+            }
+        });
+
+    </script>
+    <script>
+        //1. lable的for属性 for指向id 这样点文本也能操作复选框
+    </script>
+</body>
+
+</html>

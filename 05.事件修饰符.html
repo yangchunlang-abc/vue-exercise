@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+    <div class="root">
+        <!-- 绑定事件的同时,阻止默认跳转 -->
+        <!-- 事件修饰符加在事件绑定的后面 -->
+        <a href="http://www.baidu.com" @click.prevent="show">跳转到百度</a>
+    </div>
+    <script>
+        //创建vue实例
+        new Vue({
+            el: '.root', //指定当前vue 为哪个容器使用
+            data: {
+
+            },
+            methods: {
+                show(e) {
+                    //e.preventDefault(); //阻止默认跳转
+                    console.log('点击连接');
+                }
+            }
+        });
+
+    </script>
+    <script>
+        //1. .prevent 阻止默认行为
+        //2. .stop 阻止事件冒泡 
+    </script>
+</body>
+
+</html>

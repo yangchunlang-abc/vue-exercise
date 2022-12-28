@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+    <div class="root">
+        <p v-if="flag">这是被v-if控制的元素</p>
+        <p v-show="flag">这是被v-show控制的元素</p>
+        <hr>
+        <div v-if="type === 'A'">优秀</div>
+        <div v-else-if="type === 'B'">一般</div>
+        <div v-else>差</div>
+    </div>
+
+
+    <script>
+        //创建vue实例
+        new Vue({
+            el: '.root', //指定当前vue 为哪个容器使用
+            data: {
+                flag: true,
+                type: 'A'
+            }
+        });
+
+    </script>
+    <script>
+            //1. v-show 的原理是动态为元素添加移除display（频繁切换显示用v-show）
+            //2. v-if  的原理是没次动态添加或移除元素（默认不显示时 v-if性能更好）
+            //3. 可以给v-if 一个判断条件
+    </script>
+</body>
+
+</html>

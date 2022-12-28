@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <style>
+    .red {
+      color: red;
+    }
+  </style>
+  <div class="root">
+    <div>
+      <h1>随机点名</h1>
+      <h2>名字是:<h1 class="red">{{name}}</h1>
+      </h2>
+      <button @click="show(0,7)">开始</button>
+      <button @click="end">结束</button>
+    </div>
+  </div>
+  <script>
+    //创建vue实例
+    new Vue({
+      el: '.root', //指定当前vue 为哪个容器使用
+      data: {
+        name: '张三',
+        list: ['张三', '李四', '王五', '赵六', '小明', '黄忠', '赵云', '蔡徐坤'],
+        timer: null
+      },
+      methods: {
+        show(min, max) {
+          if (this.timer) {
+            // 拿一个timer去存计时器无论这么点都只是执行着一个计时器
+            return
+          }
+          this.timer = setInterval(() => {
+            let r = Math.floor(Math.random() * (max - min + 1) + min)
+            this.name = this.list[r]
+          }, 100)
+          // 
+        },
+        end() {
+          clearInterval(this.timer)
+          this.timer = null
+        }
+      }
+    });
+    // 这个随机要节流
+  </script>
+</body>
+
+</html>

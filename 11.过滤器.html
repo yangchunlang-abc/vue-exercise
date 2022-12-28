@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+    <div class="root">
+        <!-- 放大字母的过滤器 -->
+        <p>{{message | capi}}</p>
+    </div>
+    <script>
+        //全局过滤器 (常用)
+        //如果全局过滤器和私有过滤器名字冲突  先调用私有
+        Vue.filter('capi', function (str) {
+            return str.toUpperCase()
+        })
+        //创建vue实例
+        new Vue({
+            el: '.root', //指定当前vue 为哪个容器使用
+            data: {
+                message: 'hello'
+            },
+            //过滤器函数必须定义在filters下
+            //定义在filters里的叫私有过滤器
+            filters: {
+                // capi(str) {
+
+                //     //返回的是过滤的结果
+                //     return str.toUpperCase()
+
+                // }
+            }
+
+
+        });
+
+    </script>
+</body>
+
+</html>

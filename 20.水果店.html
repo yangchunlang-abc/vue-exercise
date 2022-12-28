@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <div class="root">
+    <div>
+      <table>
+
+        <tbody>
+          <tr>
+            <th>Vue水果店</th>
+          </tr>
+          <tr>
+            <td> 苹果10￥/斤，折扣<8折>
+            </td>
+          </tr>
+          <tr>
+            <td>请输入你要购买的斤数: <input type="number" v-model="count"> </td>
+          </tr>
+          <tr>
+            <td><button @click="buy">结款</button></td>
+          </tr>
+          <tr>
+            <td>总价:{{zhong}}--折后价{{isCount}}--省了{{free}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <script>
+    //创建vue实例
+    new Vue({
+      el: '.root', //指定当前vue 为哪个容器使用
+      data: {
+        count: 0,
+        flag: false,
+        isCount: 0,
+        free: 0,
+        zhong: 0
+
+      },
+      methods: {
+        buy() {
+          this.zhong = this.count * 10
+          this.isCount = this.zhong * 0.8
+          this.free = this.zhong - this.isCount
+        }
+      }
+    });
+
+  </script>
+</body>
+
+</html>

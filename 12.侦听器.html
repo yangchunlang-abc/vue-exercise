@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="../js相关引用/js/jquery.mini.js"></script>
+</head>
+
+<body>
+    <div class="root">
+        <input type="text" v-model="username">
+    </div>
+    <script>
+        //创建vue实例
+        new Vue({
+            el: '.root', //指定当前vue 为哪个容器使用
+            data: {
+                username: "admin"
+            },
+            //在watch节点中侦听
+            watch: {
+                //监听的值作为方法名
+                username(newVal, oldVal) {
+                    //                     该侦听器不能进入网页直接触发
+                    //1.调用jquery中的ajax发起请求 判断newVal是否被占用
+                    //2. 如果newVal为空
+                    if (newVal === '') {
+                        return
+                    }
+                    $.get('https://www.escook.cn/api/finduser/' + newVal, function (res) {
+                        console.log(res);
+                    })
+                },
+                //---直接触发的监听器(对象格式)
+                username: {
+                    handler(newVal, oldVal) {
+                        console.log(newVal, oldVal);
+                    },
+                    //控制侦听器是否自动触发（默认false）
+                    immediate: true,
+                    //开启深度监听
+                    deep: true
+                }
+            }
+        });
+
+    </script>
+    <script>
+        //1. watch侦听器  监视事件的变化 从而作出其他操作(本质也是一个函数)
+        //2. (新值,旧值)   要直接侦听就使用对象格式并把immediate改为true 对象也有handler属性
+        //3. 如果监听对象 不会监听到对象里的属性值（这可以用deep深度监听）
+        //4. deep:true 只要对象里的属性改变就会触发侦听器
+        //5. 使用"对象.属性" 也可以深度监听   
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+    <div class="root">
+        <p>用户名是: {{username}}</p>
+        <input type="text" v-model="username">
+        <hr>
+        <!-- v-bind是单向绑定 -->
+        <input type="text" :value="username">
+        <!-- v-model的修饰符 -->
+        <hr>
+        <input type="text" v-model.number="x"> +
+        <input type="text" v-model.number="y">
+        = {{x + y}}
+        <hr>
+        <input type="text" v-model.trim.lazy="username2"><button @click="showName">显示名字</button>
+    </div>
+    <script>
+        //创建vue实例
+        new Vue({
+            el: '.root', //指定当前vue 为哪个容器使用
+            data: {
+                username: '张三',
+                x: 0,
+                y: 0,
+                username2: ''
+            },
+            methods: {
+                showName() {
+                    console.log(`用户名是: ${this.username2}`);
+                }
+            }
+        });
+
+    </script>
+    <script>
+        //1. 数据双向绑定更新  v-model
+        //2. v-model修饰符
+        //(1) .number 值的格式为数字
+        //(2) .trim   过滤空格
+        //(3) .lazy   双向数据不会实时同步
+    </script>
+</body>
+
+</html>

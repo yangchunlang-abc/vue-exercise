@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <style>
+    ul li {
+      float: left;
+      margin-left: 20px;
+      list-style: none;
+      display: inline-block;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+
+
+    .active {
+      color: pink;
+      border-bottom: 5px solid pink;
+
+    }
+  </style>
+  <div class="root">
+    <ul v-for="(k,i) in list" :key="i">
+      <li :class="{'active':index === i}" @mouseover="show(i)">{{k}}</li>
+    </ul>
+  </div>
+  <script>
+    //创建vue实例
+    new Vue({
+      el: '.root', //指定当前vue 为哪个容器使用
+      data: {
+        list: ['热门', '咖啡', '饮食', '男装', '女装', '眼睛', '内衣', '内裤'],
+        index: 0
+      },
+      methods: {
+        show(i) {
+          this.index = i
+        }
+      }
+    });
+
+  </script>
+</body>
+
+</html>

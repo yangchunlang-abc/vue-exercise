@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <div class="root">
+
+    <div class="header">春晓 <button @click="show">{{msg}}</button></div>
+    <div class="container" v-show="flag"> 春眠不觉晓，处处闻啼鸟。<br>
+      夜来风雨声，花落知多少。</div>
+
+  </div>
+  <script>
+    //创建vue实例
+    new Vue({
+      el: '.root', //指定当前vue 为哪个容器使用
+      data: {
+        msg: "展开",
+        flag: false
+      },
+      methods: {
+        show() {
+          if (this.flag === true) {
+            this.msg = '展开'
+            this.flag = false
+          } else {
+            this.msg = '收起'
+            this.flag = true
+          }
+        }
+      }
+    });
+
+  </script>
+</body>
+
+</html>

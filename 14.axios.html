@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+    <button id="btnPost">点击发起get请求</button>
+    <script>
+        //axios 是一个专注于网络请求的库(艾克c奥斯)
+        document.querySelector('#btnPost').addEventListener('click', async function () {
+            const { data: res } = await axios({
+                method: 'get',  //请求方式
+                url: 'http://www.liulongbin.top:3006/api/getbooks', //请求地址
+                // url查询参数(get传参用)
+                params: {},
+                //请求体参数（post传参用）
+                data: {}
+            })
+            // result.then(function (res) {
+            //     console.log(res);
+            // })
+            // console.log(result);
+            console.log(res.data);
+        })
+
+        //axios 在请求到数据后给数据套了一层壳
+        //调用axios后使用 await 和 async 进行简化
+        // 如果方法的返回值是promise 就在方法前加await 同时调用方法前加 async
+        // 解构赋值 已经知道右侧有6个属性  可以在左侧 使用{属性名:新的名字} 接收特定的属性值
+        //解构赋值可以重命名
+    </script>
+</body>
+
+</html>

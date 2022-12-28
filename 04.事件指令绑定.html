@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">{{count}}
+        <button v-on:click="addCount(3,$event)">+1</button>
+        <button @click="subCount">-1</button>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                count: 0
+            },
+            //methods：定义事件处理函数 
+            methods: {
+                // addCount: function () {
+                //     console.log('绑定了事件');
+                // }
+                //简写
+                addCount(n, e) {
+                    this.count += n;
+                    if (this.count % 2 === 0) {
+                        e.target.style.background = 'red'
+                    }
+                    else {
+                        e.target.style.background = 'blue'
+                    }
+                },
+                subCount() {
+                    this.count--;
+                }
+            }
+        })
+    </script>
+    <script>
+        //1. 事件绑定指令 v-on 可以简写@
+        //2. 绑定的事件可以用小括号传递参数
+        //3. 事件对象 $event (原生事件对象e) (不常用)
+    </script>
+</body>
+
+</html>

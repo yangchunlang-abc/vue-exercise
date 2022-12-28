@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <div class="root">
+    <input type="text" v-model="city" @keyup.enter="get">
+    <button @click="get">调用接口(测试用)</button>
+    <hr>
+    <ul v-for="item in that">
+      <li>城市--- {{item.address}}</li>
+      <li> 天气湿度--{{item.humidity}}</li>
+      <li>天气-- {{item.weather}}</li>
+      <li> 温度---{{item.temp}}</li>
+    </ul>
+  </div>
+  <script>
+    //创建vue实例
+    new Vue({
+      el: '.root', //指定当前vue 为哪个容器使用
+      data: {
+        city: '北京市',
+        msg: '?app_id=uihopineutllenhd&app_secret=M2NVdG5kU1FLUUhZdndRWUZRWjhKdz09',
+        that: []
+      },
+      methods: {
+        async get() {
+          const { data: res } = await axios({
+            method: 'get',
+            url: ' https://www.mxnzp.com/api/weather/current/' + this.city + this.msg,
+            params: {
+
+            }
+          })
+          console.log(res);
+          if (this.that.length != 0) {
+            // 如果数组清除原来城市的参数
+            this.that.length = 0
+          }
+          // 把数据渲染到页面
+          this.that.push(res.data)
+
+        },
+
+      }
+    });
+
+  </script>
+</body>
+
+</html>

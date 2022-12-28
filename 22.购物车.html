@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+</head>
+
+<body>
+  <div class="root">
+    <table border="1" cellspacing="0px">
+      <tbody>
+        <tr>
+          <th>编号</th>
+          <th>品牌名称</th>
+          <th>成立时间</th>
+          <th>操作</th>
+        </tr>
+        <tr v-for="item in list" :key="item.id">
+          <td>{{item.id}}</td>
+          <td>{{item.title}}</td>
+          <td>{{item.成立时间}}</td>
+          <td><button @click="delect(item.id)">删除</button></td>
+
+        </tr>
+        <tr v-if="list.length===0">
+          <!-- colspan表示表格单元横跨几个 -->
+          <td colspan="">没有数据了</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    //创建vue实例
+    new Vue({
+      el: '.root', //指定当前vue 为哪个容器使用
+      data: {
+        list: [{ id: 101, title: '奔驰', 成立时间: dayjs().format('YYYY-MM-DD') },
+        { id: 203, title: '宝马', 成立时间: dayjs().format('YYYY-MM-DD') },
+        { id: 302, title: '大众', 成立时间: dayjs().format('YYYY-MM-DD') },
+        { id: 408, title: '本田', 成立时间: dayjs().format('YYYY-MM-DD') },
+        { id: 508, title: '奥迪', 成立时间: dayjs().format('YYYY-MM-DD') }]
+      },
+      methods: {
+        delect(id) {
+          // 这个id只是数组编号
+          let index = this.list.findIndex(item => item.id === id)
+          console.log(index);
+          // index是下标
+          this.list.splice(index, 1)
+        }
+      }
+    });
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <button id="btnGet">Get</button>
+    <button id="btnPost">Post</button>
+    <script>
+        document.querySelector('#btnGet').addEventListener('click', async function () {
+            const { data: res } = await axios.get('http://www.liulongbin.top:3006/api/getbooks', {
+                //1. get 一定要在params里写请求的参数
+                params: {
+                    id: 1
+                }
+            })
+            console.log(res.data);
+        })
+        //发起post
+        document.querySelector('#btnPost').addEventListener('click', async function () {
+            axios.post('url地址', { id: 3, name: 'zs' }, {
+                data: {
+                    id: 3, name: 'zs'
+                }
+            })
+            //1. post可以直接在axios.post()括号内写请求的数据
+            //2. 当然了post可以在data内写数据
+        })
+    </script>
+</body>
+
+</html>

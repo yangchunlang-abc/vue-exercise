@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <style>
+    table,
+    th,
+    td {
+      height: 40px;
+      width: 650px;
+      margin: 0 auto;
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
+  <div class="root">
+    姓名: <input type="text" name="" id="" v-model.trim="name">
+    年龄: <input type="number" v-model.number="age">
+    性别:
+    <select name="" id="" v-model="gender">
+      <option value="男" selected="selected">男</option>
+      <option value="女">女</option>
+    </select>
+    <button @click="add">添加</button>
+    <button @click="revise">修改</button>
+    <hr>
+    <table v-if="flag">
+      <tbody>
+        <tr>
+          <th>序号</th>
+          <th>姓名</th>
+          <th>年龄</th>
+          <th>性别</th>
+          <th>操作</th>
+        </tr>
+        <tr style="text-align: center;" v-for="(k,i) in list" :key="k.id">
+          <td>{{k.id}}</td>
+          <td>{{k.name}}</td>
+          <td>{{k.age}}</td>
+          <td>{{k.gender}}</td>
+          <td>
+            <button @click="delect(i)">删除</button>
+            <button @click="edit(i)">编辑</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    //创建vue实例
+    new Vue({
+      el: '.root', //指定当前vue 为哪个容器使用
+      data: {
+        list: [{ id: 1, name: 'zs', age: 12, gender: '男' },
+        { id: 2, name: 'ls', age: 12, gender: '男' },
+        { id: 3, name: 'ww', age: 14, gender: '男' },
+        { id: 4, name: 'zl', age: 14, gender: '女' },
+        { id: 5, name: 'as', age: 15, gender: '男' },
+        { id: 6, name: 'xm', age: 18, gender: '女' },
+        ],
+        flag: true,
+        // 添加的数据
+        id: 0,
+        name: '',
+        age: '',
+        gender: '',
+        // 存放修改的id
+        reId: 0
+      },
+      methods: {
+        //添加的方法
+        add() {
+          if (this.name.length === 0 || this.age.length === 0 || this.gender.length === 0) {
+            alert('文本框不能为空！')
+          } else {
+            this.id = this.list.length + 1
+            this.list.push({ id: this.id, name: this.name, age: this.age, gender: this.gender })
+          }
+
+        },
+        //删除的方法
+        delect(id) {
+          // id是序号
+          //删除指定索引id
+          //通过属性值找id
+
+          this.list.splice(id, 1)
+          if (this.list.length === 0) {
+            this.flag = false
+          }
+        },
+        // 编辑的方法
+        edit(id) {
+          this.reId = id
+          this.name = this.list[id].name
+          this.age = this.list[id].age
+          this.gender = this.list[id].gender
+        },
+        //修改的方法
+        revise() {
+          this.list[this.reId].name = this.name
+          this.list[this.reId].age = this.age
+          this.list[this.reId].gender = this.gender
+        }
+      }
+    });
+// 心得-----------------我本来以为做不成 后来通过变量赋值解决了
+  </script>
+</body>
+
+</html>

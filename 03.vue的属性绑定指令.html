@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 动态给placeholder绑定属性值 -->
+        <input type="text" v-bind:placeholder="tips">
+        <img :src="photo" alt="" style="width:150px">
+        <!-- v-bind可以结合javascript拼接 -->
+        <div>{{tips}}的反转结果是:{{tips.split('').reverse().join('')}}</div>
+        <div :title="'box'+index">这是一个div</div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                tips: '请输入名称！',
+                photo: 'https://v2.cn.vuejs.org/images/logo.svg',
+                id: 3,
+                index: 3
+            }
+        })
+    </script>
+    <script>
+        //1. v-bind 给属性绑定属性值 (v-bind可以简写用 :)
+        //2. 
+    </script>
+</body>
+
+</html>
